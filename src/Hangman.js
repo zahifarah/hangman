@@ -13,6 +13,7 @@ class Hangman extends Component {
   static defaultProps = {
     maxWrong: 6,
     images: [img0, img1, img2, img3, img4, img5, img6],
+    maxGuesses: 0,
   };
 
   constructor(props) {
@@ -53,6 +54,7 @@ class Hangman extends Component {
   generateButtons() {
     return "abcdefghijklmnopqrstuvwxyz".split("").map(letter => (
       <button
+        key={letter}
         value={letter}
         onClick={this.handleGuess}
         disabled={this.state.guessed.has(letter)}>
@@ -63,10 +65,18 @@ class Hangman extends Component {
 
   /** render: render game */
   render() {
+    /** display number of wrong guesses */
+    const wrongMsg = this.state.nWrong ? (
+      <p className="Hangman-wrongCount">Wrong guesses: {this.state.nWrong}</p>
+    ) : (
+      ""
+    );
+
     return (
       <div className="Hangman">
         <h1>Hangman</h1>
         <img src={this.props.images[this.state.nWrong]} />
+        {wrongMsg}
         <p className="Hangman-word">{this.guessedWord()}</p>
         <p className="Hangman-btns">{this.generateButtons()}</p>
       </div>
