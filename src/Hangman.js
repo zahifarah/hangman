@@ -11,9 +11,8 @@ import img6 from "./images/6.jpg";
 class Hangman extends Component {
   /** by default, allow 6 guesses and use provided gallows images. */
   static defaultProps = {
-    maxWrong: 6,
+    maxWrong: 3,
     images: [img0, img1, img2, img3, img4, img5, img6],
-    maxGuesses: 0,
   };
 
   constructor(props) {
@@ -44,9 +43,8 @@ class Hangman extends Component {
   handleGuess(evt) {
     let letter = evt.target.value;
     this.setState(st => ({
-      guessed: st.guessed.add(letter),
-      // if state.answer.includes(letter) evaluates to true and add 0 to nWrong, else add 1
-      nWrong: st.nWrong + (st.answer.includes(letter) ? 0 : 1),
+      guessed: st.guessed.add(letter), // add guessed letter to guessed Set
+      nWrong: st.nWrong + (st.answer.includes(letter) ? 0 : 1), // wrong answer means +1 to nWrong
     }));
   }
 
@@ -63,22 +61,37 @@ class Hangman extends Component {
     ));
   }
 
-  /** render: render game */
   render() {
+    const correctAnswer = this.state.answer;
+
     /** display number of wrong guesses */
-    const wrongMsg = this.state.nWrong ? (
+    const wrongCount = this.state.nWrong ? (
       <p className="Hangman-wrongCount">Wrong guesses: {this.state.nWrong}</p>
     ) : (
       ""
     );
 
+    /** announce loss + reveal answer */
+    const loseMsg =
+      this.state.nWrong < this.props.maxWrong ? (
+        <p className="Hangman-btns">{this.generateButtons()}</p>
+      ) : (
+        <div>
+          <h2>
+            The correct answer was{" "}
+            <span className="correctAnswer">"{correctAnswer}"</span>
+          </h2>
+          <h2 className="Hangman-loseMsg">You lost ;(</h2>
+        </div>
+      );
+
     return (
       <div className="Hangman">
         <h1>Hangman</h1>
         <img src={this.props.images[this.state.nWrong]} />
-        {wrongMsg}
+        {wrongCount}
         <p className="Hangman-word">{this.guessedWord()}</p>
-        <p className="Hangman-btns">{this.generateButtons()}</p>
+        {loseMsg}
       </div>
     );
   }
