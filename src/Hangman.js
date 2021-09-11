@@ -66,7 +66,9 @@ class Hangman extends Component {
 
     /** display number of wrong guesses */
     const wrongCount = this.state.nWrong ? (
-      <p className="Hangman-wrongCount">Wrong guesses: {this.state.nWrong}</p>
+      <p className="Hangman-wrongCount">
+        Wrong guesses: {this.state.nWrong}/{this.props.maxWrong}
+      </p>
     ) : (
       ""
     );
@@ -81,14 +83,17 @@ class Hangman extends Component {
             The correct answer was{" "}
             <span className="correctAnswer">"{correctAnswer}"</span>
           </h2>
-          <h2 className="Hangman-loseMsg">You lost ;(</h2>
+          <h2 className="Hangman-loseMsg">You lose ;(</h2>
         </div>
       );
 
     return (
       <div className="Hangman">
         <h1>Hangman</h1>
-        <img src={this.props.images[this.state.nWrong]} />
+        <img
+          src={this.props.images[this.state.nWrong]}
+          alt={`Wrong guesses: ${this.state.nWrong}/${this.props.maxWrong}`}
+        />
         {wrongCount}
         <p className="Hangman-word">{this.guessedWord()}</p>
         {loseMsg}
