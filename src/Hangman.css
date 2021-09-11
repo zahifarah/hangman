@@ -14,8 +14,8 @@
 .Hangman h1 {
   font-size: 4rem;
   font-weight: 100;
-  margin-bottom: 0.1em;
-  margin-top: 0;
+  margin-bottom: 0.2em;
+  margin-top: -45px;
 }
 
 .Hangman-word {
@@ -54,7 +54,7 @@
   font-family: inherit;
   font-size: 1rem;
   cursor: pointer;
-  width: 30px;
+  width: auto;
   margin: 5px 2px 2px 2px;
   letter-spacing: 1px;
   outline: none;
