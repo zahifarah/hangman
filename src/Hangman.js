@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { randomWord } from "./words";
 import "./Hangman.css";
 import img0 from "./images/0.jpg";
 import img1 from "./images/1.jpg";
@@ -11,7 +12,7 @@ import img6 from "./images/6.jpg";
 class Hangman extends Component {
   /** by default, allow 6 guesses and use provided gallows images. */
   static defaultProps = {
-    maxWrong: 3,
+    maxWrong: 2,
     images: [img0, img1, img2, img3, img4, img5, img6],
   };
 
@@ -20,7 +21,7 @@ class Hangman extends Component {
     this.state = {
       nWrong: 0,
       guessed: new Set(),
-      answer: "apple",
+      answer: randomWord(),
     };
 
     /** handlers */
@@ -81,9 +82,11 @@ class Hangman extends Component {
         <div>
           <h2>
             The correct answer was{" "}
-            <span className="correctAnswer">"{correctAnswer}"</span>
+            <span className="Hangman-correctAnswer">"{correctAnswer}"</span>
           </h2>
-          <h2 className="Hangman-loseMsg">You lose ;(</h2>
+          <h2>
+            You <span className="Hangman-result">lose ;(</span>
+          </h2>
         </div>
       );
 
