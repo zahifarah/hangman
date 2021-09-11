@@ -12,7 +12,7 @@ import img6 from "./images/6.jpg";
 class Hangman extends Component {
   /** by default, allow 6 guesses and use provided gallows images. */
   static defaultProps = {
-    maxWrong: 2,
+    maxWrong: 6,
     images: [img0, img1, img2, img3, img4, img5, img6],
   };
 
@@ -76,6 +76,14 @@ class Hangman extends Component {
     const gameOver = this.state.nWrong >= this.props.maxWrong;
     const wrongOverMaxWrong = `${this.state.nWrong}/${this.props.maxWrong}`;
 
+    const isWinner = this.guessedWord().join("") === this.state.answer && (
+      <p>You Win!</p>
+    );
+
+    let gameState = this.generateButtons();
+    if (isWinner) gameState = "You Win!";
+    if (gameOver) gameState = "You Lose!";
+
     return (
       <div className="Hangman">
         <h1>Hangman</h1>
@@ -90,9 +98,7 @@ class Hangman extends Component {
           {!gameOver ? this.guessedWord() : this.state.answer}
         </p>
 
-        <p className="Hangman-btns">
-          {!gameOver ? this.generateButtons() : `You lose!`}
-        </p>
+        <p className="Hangman-btns">{gameState}</p>
 
         <button id="reset" onClick={this.restart}>
           Restart
