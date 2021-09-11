@@ -19,36 +19,26 @@
 }
 
 .Hangman-word {
-  letter-spacing: 1em;
+  letter-spacing: 0.5em;
   margin: 0.4em -1em 0.2em 0;
   font-size: 2rem;
 }
 
-.Hangman-correctAnswer {
-  color: green;
-  font-weight: 900;
-  font-size: 1.5rem;
-}
-
 .Hangman-wrongCount {
   font-size: 1.1rem;
-  margin: 20px 0px -5px;
+  margin: 20px 0px 0px;
   letter-spacing: 0.5px;
   color: rgb(0, 0, 0);
   font-weight: 600;
 }
 
-.Hangman-result {
-  color: red;
-  font-weight: 900;
-}
-
+/* 
 .Hangman-btns {
   text-align: center;
   display: inline-block;
   width: 250px;
   margin-top: 0;
-}
+} */
 
 .Hangman button {
   border: none;
