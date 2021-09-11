@@ -74,29 +74,12 @@ class Hangman extends Component {
   /** render: render-game */
   render() {
     const correctAnswer = this.state.answer;
-
     /** display number of wrong guesses */
     const wrongCount = (
       <p className="Hangman-wrongCount">
         Wrong guesses: {this.state.nWrong}/{this.props.maxWrong}
       </p>
     );
-
-    /** announce loss + reveal answer */
-    const loseMsg =
-      this.state.nWrong < this.props.maxWrong ? (
-        <p className="Hangman-btns">{this.generateButtons()}</p>
-      ) : (
-        <div>
-          <h2>
-            The correct answer was{" "}
-            <span className="Hangman-correctAnswer">"{correctAnswer}"</span>
-          </h2>
-          <h2>
-            You <span className="Hangman-result">lose ;(</span>
-          </h2>
-        </div>
-      );
 
     return (
       <div className="Hangman">
@@ -107,7 +90,13 @@ class Hangman extends Component {
         />
         {wrongCount}
         <p className="Hangman-word">{this.guessedWord()}</p>
-        {loseMsg}
+
+        <p className="Hangman-btns">
+          {this.state.nWrong < this.props.maxWrong
+            ? this.generateButtons()
+            : `You lose. The correct answer was: "${this.state.answer}"`}
+        </p>
+
         <button className="Hangman-restart" onClick={this.restart}>
           Restart
         </button>
