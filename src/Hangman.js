@@ -74,18 +74,17 @@ class Hangman extends Component {
   /** render: render-game */
   render() {
     const gameOver = this.state.nWrong >= this.props.maxWrong;
+    const wrongOverMaxWrong = `${this.state.nWrong}/${this.props.maxWrong}`;
 
     return (
       <div className="Hangman">
         <h1>Hangman</h1>
         <img
           src={this.props.images[this.state.nWrong]}
-          alt={`Wrong guesses: ${this.state.nWrong}/${this.props.maxWrong}`}
+          alt={`${wrongOverMaxWrong} guesses`}
         />
 
-        <p className="Hangman-wrongCount">
-          Wrong guesses: {this.state.nWrong}/{this.props.maxWrong}
-        </p>
+        <p className="Hangman-wrongCount">Wrong guesses: {wrongOverMaxWrong}</p>
 
         <p className="Hangman-word">
           {!gameOver ? this.guessedWord() : this.state.answer}
