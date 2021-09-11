@@ -76,12 +76,10 @@ class Hangman extends Component {
     const correctAnswer = this.state.answer;
 
     /** display number of wrong guesses */
-    const wrongCount = this.state.nWrong ? (
+    const wrongCount = (
       <p className="Hangman-wrongCount">
         Wrong guesses: {this.state.nWrong}/{this.props.maxWrong}
       </p>
-    ) : (
-      ""
     );
 
     /** announce loss + reveal answer */
