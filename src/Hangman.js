@@ -28,6 +28,15 @@ class Hangman extends Component {
     this.restart = this.restart.bind(this);
   }
 
+  /** restart game */
+  restart() {
+    this.setState({
+      nWrong: 0,
+      guessed: new Set(),
+      answer: randomWord(),
+    });
+  }
+
   /** guessedWord: show current-state of word:
     if guessed letters are {a,p,e}, show "app_e" for "apple"
   */
@@ -60,15 +69,6 @@ class Hangman extends Component {
         {letter}
       </button>
     ));
-  }
-
-  /** restart game */
-  restart(evt) {
-    this.setState({
-      nWrong: 0,
-      guessed: new Set(),
-      answer: randomWord(),
-    });
   }
 
   /** render: render-game */
